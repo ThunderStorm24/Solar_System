@@ -269,15 +269,6 @@ function selectPlanet(planet) {
   if (planet.name!==''){
     console.log(planet);
     selectedPlanet = planet;
-    
-   /* if (selectedPlanet) {
-        selectedPlanet.material.color.set(selectedPlanet.originalColor);
-      }
-    
-      selectedPlanet = planet;
-      selectedPlanet.originalColor = selectedPlanet.material.color.clone();
-    
-      selectedPlanet.material.color.set(0xff0000); */
 
     camera.lookAt(selectedPlanet.position);
   }
@@ -371,116 +362,85 @@ function onScroll(event) {
   
   }
 
+  const planetsRing = [
+    { planet: mercury, ring: mercuryRing },
+    { planet: venus, ring: venusRing },
+    { planet: earth, ring: earthRing },
+    { planet: mars, ring: marsRing },
+    { planet: jupiter, ring: jupiterRing },
+    { planet: saturn, ring: saturnRing },
+    { planet: uranus, ring: uranusRing },
+    { planet: neptune, ring: neptuneRing }
+  ];
+  
   function updateRingScale() {
-    const distanceM = mercury.position.distanceTo(camera.position);
-    const scaleM = Math.sqrt(distanceM) * 10; // Ustawienie odpowiedniej skali, możesz dostosować wartość
-    mercuryRing.scale.set(scaleM, scaleM, 1);
-    const distanceV = venus.position.distanceTo(camera.position);
-    const scaleV = Math.sqrt(distanceV) * 10; // Ustawienie odpowiedniej skali, możesz dostosować wartość
-    venusRing.scale.set(scaleV, scaleV, 1);
-    const distanceE = earth.position.distanceTo(camera.position);
-    const scaleE = Math.sqrt(distanceE) * 10; // Ustawienie odpowiedniej skali, możesz dostosować wartość
-    earthRing.scale.set(scaleE, scaleE, 1);
-    const distanceMa = mars.position.distanceTo(camera.position);
-    const scaleMa = Math.sqrt(distanceMa) * 10; // Ustawienie odpowiedniej skali, możesz dostosować wartość
-    marsRing.scale.set(scaleMa, scaleMa, 1);
-    const distanceJ = jupiter.position.distanceTo(camera.position);
-    const scaleJ = Math.sqrt(distanceJ) * 10; // Ustawienie odpowiedniej skali, możesz dostosować wartość
-    jupiterRing.scale.set(scaleJ, scaleJ, 1);
-    const distanceU = uranus.position.distanceTo(camera.position);
-    const scaleU = Math.sqrt(distanceU) * 10; // Ustawienie odpowiedniej skali, możesz dostosować wartość
-    uranusRing.scale.set(scaleU, scaleU, 1);
-    const distanceS = saturn.position.distanceTo(camera.position);
-    const scaleS = Math.sqrt(distanceS) * 10; // Ustawienie odpowiedniej skali, możesz dostosować wartość
-    saturnRing.scale.set(scaleS, scaleS, 1);
-    const distanceN = neptune.position.distanceTo(camera.position);
-    const scaleN = Math.sqrt(distanceN) * 10; // Ustawienie odpowiedniej skali, możesz dostosować wartość
-    neptuneRing.scale.set(scaleN, scaleN, 1);
+    planetsRing.forEach(({ planet, ring }) => {
+      const distance = planet.position.distanceTo(camera.position);
+      const scale = Math.sqrt(distance) * 8;
+      ring.scale.set(scale, scale, 1);
+    });
   }
+  
+  const planets = [sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune];
 
-function animate() {
-  requestAnimationFrame(animate);
-  updateRingScale();
-  sun.rotateOnAxis(sunAxis, sunSpeed);
-  mercury.rotateOnAxis(earthAxis, earthSpeed);
-  venus.rotateOnAxis(earthAxis, earthSpeed);
-  earth.rotateOnAxis(earthAxis, earthSpeed);
-  mars.rotateOnAxis(earthAxis, earthSpeed);
-  jupiter.rotateOnAxis(earthAxis, earthSpeed);
-  saturn.rotateOnAxis(earthAxis, earthSpeed);
-  uranus.rotateOnAxis(earthAxis, earthSpeed);
-  neptune.rotateOnAxis(earthAxis, earthSpeed);
-
-  renderer.render(scene, camera);
-}
-
+  function animate() {
+    requestAnimationFrame(animate);
+    updateRingScale();
+  
+    planets.forEach((planet) => {
+      planet.rotateOnAxis(earthAxis, earthSpeed);
+    });
+  
+    renderer.render(scene, camera);
+  }
+  
 // Dodawanie nasłuchiwania na zdarzenia myszy
 document.addEventListener('mousedown', onMouseDown, false);
 document.addEventListener('mousemove', onMouseMove);
 document.addEventListener('wheel', onScroll);
 document.addEventListener('mouseup', onMouseUp, false);
 
-const sunC = document.getElementById("sun");
-sunC.addEventListener('click',onSunClick)
-function onSunClick(){
-  console.log("test0");
-    selectPlanet(sun);
-}
 
-const mercuryC = document.getElementById("mercury");
-mercuryC.addEventListener('click',onMercuryClick)
-function onMercuryClick(){
-    console.log("test1");
-    selectPlanet(mercury);
-}
+const planetElements = document.querySelectorAll("#modular-window div");
 
-const venusC = document.getElementById("venus");
-venusC.addEventListener('click',onVenusClick)
-function onVenusClick(){
-    console.log("test2");
-    selectPlanet(venus);
-}
+planetElements.forEach((planet) => {
+  planet.addEventListener("click", onPlanetClick);
+});
 
-const earthC = document.getElementById("earth");
-earthC.addEventListener('click',onEarthClick)
-function onEarthClick(){
-    console.log("test3");
-    selectPlanet(earth);
-}
-
-const marsC = document.getElementById("mars");
-marsC.addEventListener('click',onMarsClick)
-function onMarsClick(){
-    console.log("test4");
-    selectPlanet(mars);
-}
-
-const jupiterC = document.getElementById("jupiter");
-jupiterC.addEventListener('click',onJupiterClick)
-function onJupiterClick(){
-    console.log("test5");
-    selectPlanet(jupiter);
-}
-
-const saturnC = document.getElementById("saturn");
-saturnC.addEventListener('click',onSaturnClick)
-function onSaturnClick(){
-    console.log("test6");
-    selectPlanet(saturn);
-}
-
-const uranusC = document.getElementById("uranus");
-uranusC.addEventListener('click',onUranusClick)
-function onUranusClick(){
-    console.log("test7");
-    selectPlanet(uranus);
-}
-
-const neptuneC = document.getElementById("neptune");
-neptuneC.addEventListener('click',onNeptuneClick)
-function onNeptuneClick(){
-    console.log("test18");
-    selectPlanet(neptune);
+function onPlanetClick(event) {
+  const planetId = event.target.id;
+  
+  switch (planetId) {
+    case "sun":
+      selectPlanet(sun);
+      break;
+    case "mercury":
+      selectPlanet(mercury);
+      break;
+    case "venus":
+      selectPlanet(venus);
+      break;
+    case "earth":
+      selectPlanet(earth);
+      break;
+    case "mars":
+      selectPlanet(mars);
+      break;
+    case "jupiter":
+      selectPlanet(jupiter);
+      break;
+    case "saturn":
+      selectPlanet(saturn);
+      break;
+    case "uranus":
+      selectPlanet(uranus);
+      break;
+    case "neptune":
+      selectPlanet(neptune);
+      break;
+    default:
+      break;
+  }
 }
 
 
