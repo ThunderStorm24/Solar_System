@@ -1,13 +1,34 @@
 <!DOCTYPE html>
 <html>
-	<head lang="en">
-		<meta charset="utf-8">
-		<title>My first three.js app</title>
-		<style>
-			body { margin: 0; }
-		</style>
-	</head>
-	<body>
-		<script type="module" src="/main.js"></script>
-	</body>
+    <head lang="en">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <meta charset="utf-8">
+        <title>My first three.js app</title>
+        <link rel="stylesheet" href="main.css" type="text/css">
+    </head>
+    <body>
+        <div id="modular-window">
+            <div id="sun" class="clicked">Sun</div>
+            <div id="mercury">Mercury</div>
+            <div id="venus">Venus</div>
+            <div id="earth">Earth</div>
+            <div id="mars">Mars</div>
+            <div id="jupiter">Jupiter</div>
+            <div id="saturn">Saturn</div>
+            <div id="uranus">Uranus</div>
+            <div id="neptune">Neptune</div>
+        </div>
+        
+        <script type="module" src="/main.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("#modular-window div").click(function() {
+                    $("#modular-window div").removeClass("clicked");
+                    $(this).addClass("clicked");
+                });
+            });
+        </script>
+    </body>
 </html>
