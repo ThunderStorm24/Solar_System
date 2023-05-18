@@ -1,4 +1,12 @@
 import * as THREE from 'three';
+import {mercury, mercuryOrbit, mercuryRing } from './Planets/mercury'
+import {venus, venusOrbit, venusRing } from './Planets/venus'
+import {earth, earthOrbit, earthRing  } from './Planets/earth'
+import { mars, marsOrbit, marsRing  } from './Planets/mars'
+import { jupiter, jupiterOrbit, jupiterRing } from './Planets/jupiter'
+import { saturn, saturnOrbit, saturnRing } from './Planets/saturn'
+import { uranus, uranusOrbit, uranusRing } from './Planets/uranus'
+import { neptune, neptuneOrbit, neptuneRing } from './Planets/neptune'
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -15,18 +23,10 @@ scene.add( light );
 const environmentTexture = new THREE.TextureLoader().load('./assets/star_milky.jpg');
 scene.background = environmentTexture;
 
-/* const backgroundGeometry = new THREE.SphereGeometry(-40, 32, 32);
-const backgroundTexture = new THREE.TextureLoader().load('./assets/star_milky.jpg');
-const backgroundMaterial = new THREE.MeshStandardMaterial({ map: backgroundTexture });
-const background = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
-background.position.set(5, 0, 0);
-scene.add(background); */
-
 const uint8 = new Uint8Array(4)
 uint8.fill(255)
 const texture = new THREE.DataTexture(uint8, 1, 1);
 texture.needsUpdate = true;
-
 
 const sunRadius = 6.9634;
 const sunGeometry = new THREE.SphereGeometry(sunRadius, 32, 32);
@@ -37,217 +37,60 @@ const sun = new THREE.Mesh(sunGeometry, sunMaterial);
 sun.add(sunLight);
 sun.name = "Sun";
 sun.position.set(0, 0, 0);
+
 scene.add(sun);
 
-const mercuryGeometry = new THREE.SphereGeometry(0.02439, 32, 32);
-const mercuryTexture = new THREE.TextureLoader().load('./assets/mercury.jpg');
-const mercuryMaterial = new THREE.MeshStandardMaterial({ map: mercuryTexture });
-const mercury = new THREE.Mesh(mercuryGeometry, mercuryMaterial);
-mercury.name = "Mercury";
-mercury.position.set(58 + sunRadius, 0, 0);
+//Mercury
 scene.add(mercury);
-
-const mercuryOrbitRadius = 58 + sunRadius; // Przeniesiona definicja zmiennej
-const mercuryOrbitPoints = 100;
-const mercuryOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(mercuryOrbitRadius, mercuryOrbitPoints));
-mercuryOrbitGeometry.attributes.position.count -= 1;
-const mercuryOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x714e81 });
-const mercuryOrbit = new THREE.LineLoop(mercuryOrbitGeometry, mercuryOrbitMaterial);
 scene.add(mercuryOrbit);
-
-
-const mercuryRingRadius = 0.05; // Przykładowy promień obręczy
-const mercuryRingSegments = 100; // Przykładowa liczba segmentów obręczy
-const mercuryRingGeometry = new THREE.RingGeometry(mercuryRingRadius, mercuryRingRadius + 0.01, mercuryRingSegments);
-const mercuryRingMaterial = new THREE.MeshBasicMaterial({ color: 0x714e81, side: THREE.DoubleSide });
-const mercuryRing = new THREE.Mesh(mercuryRingGeometry, mercuryRingMaterial);
 mercury.add(mercuryRing);
-
 mercuryRing.rotation.x = Math.PI / 2; // Obrót wzdłuż osi X o 90 stopni
 
-const venusGeometry = new THREE.SphereGeometry(0.06, 32, 32);
-const venusTexture = new THREE.TextureLoader().load('./assets/venus.jpg');
-const venusMaterial = new THREE.MeshStandardMaterial({ map: venusTexture });
-const venus = new THREE.Mesh(venusGeometry, venusMaterial);
-venus.name = "Venus";
-venus.position.set(108 + sunRadius, 0, 0);
+//Venus
 scene.add(venus);
-
-const venusOrbitRadius = 108 + sunRadius;
-const venusOrbitPoints = 100;
-const venusOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(venusOrbitRadius, venusOrbitPoints));
-venusOrbitGeometry.attributes.position.count -= 1;
-const venusOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x422d09 });
-const venusOrbit = new THREE.LineLoop(venusOrbitGeometry, venusOrbitMaterial);
 scene.add(venusOrbit);
-
-const venusRingRadius = 0.07; // Przykładowy promień obręczy
-const venusRingSegments = 100; // Przykładowa liczba segmentów obręczy
-const venusRingGeometry = new THREE.RingGeometry(venusRingRadius, venusRingRadius + 0.01, venusRingSegments);
-const venusRingMaterial = new THREE.MeshBasicMaterial({ color: 0xf5c45a, side: THREE.DoubleSide });
-const venusRing = new THREE.Mesh(venusRingGeometry, venusRingMaterial);
 venus.add(venusRing);
-
-// Obrót obręczy
 venusRing.rotation.x = Math.PI / 2; // Obrót wzdłuż osi X o 90 stopni
 
-const earthGeometry = new THREE.SphereGeometry(0.063, 32, 32);
-const earthTexture = new THREE.TextureLoader().load('./assets/earth.jpg');
-const earthMaterial = new THREE.MeshStandardMaterial({ map: earthTexture });
-const earth = new THREE.Mesh(earthGeometry, earthMaterial);
-earth.position.set(149 + sunRadius, 0, 0);
-earth.name = "Earth";
+//Earth
 scene.add(earth);
-
-const earthOrbitRadius = 149 + sunRadius;
-const earthOrbitPoints = 100;
-const earthOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(earthOrbitRadius, earthOrbitPoints));
-earthOrbitGeometry.attributes.position.count -= 1;
-const earthOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x00394c });
-const earthOrbit = new THREE.LineLoop(earthOrbitGeometry, earthOrbitMaterial);
 scene.add(earthOrbit);
-
-const earthRingRadius = 0.07; // Przykładowy promień obręczy
-const earthRingSegments = 100; // Przykładowa liczba segmentów obręczy
-const earthRingGeometry = new THREE.RingGeometry(earthRingRadius, earthRingRadius + 0.01, earthRingSegments);
-const earthRingMaterial = new THREE.MeshBasicMaterial({ color: 0x4a90e2, side: THREE.DoubleSide });
-const earthRing = new THREE.Mesh(earthRingGeometry, earthRingMaterial);
 earth.add(earthRing);
-
-// Obrót obręczy
 earthRing.rotation.x = Math.PI / 2; // Obrót wzdłuż osi X o 90 stopni
 
-const marsGeometry = new THREE.SphereGeometry(0.03, 32, 32);
-const marsTexture = new THREE.TextureLoader().load('./assets/mars.jpg');
-const marsMaterial = new THREE.MeshStandardMaterial({ map: marsTexture });
-const mars = new THREE.Mesh(marsGeometry, marsMaterial);
-mars.position.set(228 + sunRadius, 0, 0);
-mars.name = "Mars";
+//Mars
 scene.add(mars);
-
-const marsOrbitRadius = 228 + sunRadius;
-const marsOrbitPoints = 100;
-const marsOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(marsOrbitRadius, marsOrbitPoints));
-marsOrbitGeometry.attributes.position.count -= 1;
-const marsOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x562b0e });
-const marsOrbit = new THREE.LineLoop(marsOrbitGeometry, marsOrbitMaterial);
 scene.add(marsOrbit);
-
-const marsRingRadius = 0.09; // Przykładowy promień obręczy dla Marsa
-const marsRingSegments = 100; // Przykładowa liczba segmentów obręczy dla Marsa
-const marsRingGeometry = new THREE.RingGeometry(marsRingRadius, marsRingRadius + 0.01, marsRingSegments);
-const marsRingMaterial = new THREE.MeshBasicMaterial({ color: 0x562b0e, side: THREE.DoubleSide });
-const marsRing = new THREE.Mesh(marsRingGeometry, marsRingMaterial);
 mars.add(marsRing);
-
 marsRing.rotation.x = Math.PI / 2; // Obrót wokół osi X o 90 stopni
 
-const jupiterGeometry = new THREE.SphereGeometry(0.71, 32, 32);
-const jupiterTexture = new THREE.TextureLoader().load('./assets/jupiter.jpg');
-const jupiterMaterial = new THREE.MeshStandardMaterial({ map: jupiterTexture });
-const jupiter = new THREE.Mesh(jupiterGeometry, jupiterMaterial);
-jupiter.position.set(478 + sunRadius, 0, 0);
-jupiter.name = "Jupiter";
+//Jupiter
 scene.add(jupiter);
-
-const jupiterOrbitRadius = 478 + sunRadius;
-const jupiterOrbitPoints = 100;
-const jupiterOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(jupiterOrbitRadius, jupiterOrbitPoints));
-jupiterOrbitGeometry.attributes.position.count -= 1;
-const jupiterOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x7a4e40 });
-const jupiterOrbit = new THREE.LineLoop(jupiterOrbitGeometry, jupiterOrbitMaterial);
 scene.add(jupiterOrbit);
-
-const jupiterRingRadius = 0.09; // Przykładowy promień obręczy
-const jupiterRingSegments = 100; // Przykładowa liczba segmentów obręczy dla Marsa
-const jupiterRingGeometry = new THREE.RingGeometry(jupiterRingRadius, jupiterRingRadius + 0.01, jupiterRingSegments);
-const jupiterRingMaterial = new THREE.MeshBasicMaterial({ color: 0x7a4e40, side: THREE.DoubleSide });
-const jupiterRing = new THREE.Mesh(jupiterRingGeometry, jupiterRingMaterial);
 jupiter.add(jupiterRing);
-
 jupiterRing.rotation.x = Math.PI / 2; // Obrót wokół osi X o 90 stopni
 
-const saturnGeometry = new THREE.SphereGeometry(0.6, 32, 32);
-const saturnTexture = new THREE.TextureLoader().load('./assets/saturn.jpg');
-const saturnMaterial = new THREE.MeshStandardMaterial({ map: saturnTexture });
-const saturn = new THREE.Mesh(saturnGeometry, saturnMaterial);
-saturn.position.set(600 + sunRadius, 0, 0);
-saturn.name = "Saturn";
+//Saturn
 scene.add(saturn);
-
-const saturnOrbitRadius = 600 + sunRadius;
-const saturnOrbitPoints = 100;
-const saturnOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(saturnOrbitRadius, saturnOrbitPoints));
-saturnOrbitGeometry.attributes.position.count -= 1;
-const saturnOrbitMaterial = new THREE.LineBasicMaterial({ color: 0xa09165 });
-const saturnOrbit = new THREE.LineLoop(saturnOrbitGeometry, saturnOrbitMaterial);
 scene.add(saturnOrbit);
-
-const saturnRingRadius = 0.09; // Przykładowy promień obręczy
-const saturnRingSegments = 100; // Przykładowa liczba segmentów obręczy dla Marsa
-const saturnRingGeometry = new THREE.RingGeometry(saturnRingRadius, saturnRingRadius + 0.01, saturnRingSegments);
-const saturnRingMaterial = new THREE.MeshBasicMaterial({ color: 0xC7A876, side: THREE.DoubleSide });
-const saturnRing = new THREE.Mesh(saturnRingGeometry, saturnRingMaterial);
 saturn.add(saturnRing);
-
 saturnRing.rotation.x = Math.PI / 2; // Obrót wokół osi X o 90 stopni
 
-const uranusGeometry = new THREE.SphereGeometry(0.25, 32, 32);
-const uranusTexture = new THREE.TextureLoader().load('./assets/uranus.jpg');
-const uranusMaterial = new THREE.MeshStandardMaterial({ map: uranusTexture });
-const uranus = new THREE.Mesh(uranusGeometry, uranusMaterial);
-uranus.position.set(680 + sunRadius, 0, 0);
-uranus.name = "Uranus";
+//Uranus
 scene.add(uranus);
-
-const uranusOrbitRadius = 680 + sunRadius;
-const uranusOrbitPoints = 100;
-const uranusOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(uranusOrbitRadius, uranusOrbitPoints));
-uranusOrbitGeometry.attributes.position.count -= 1;
-const uranusOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x3a737a });
-const uranusOrbit = new THREE.LineLoop(uranusOrbitGeometry, uranusOrbitMaterial);
 scene.add(uranusOrbit);
-
-const uranusRingRadius = 0.09; // Przykładowy promień obręczy
-const uranusRingSegments = 100; // Przykładowa liczba segmentów obręczy dla Marsa
-const uranusRingGeometry = new THREE.RingGeometry(uranusRingRadius, uranusRingRadius + 0.01, uranusRingSegments);
-const uranusRingMaterial = new THREE.MeshBasicMaterial({ color: 0x77B7D8, side: THREE.DoubleSide });
-const uranusRing = new THREE.Mesh(uranusRingGeometry, uranusRingMaterial);
 uranus.add(uranusRing);
-
 uranusRing.rotation.x = Math.PI / 2; // Obrót wokół osi X o 90 stopni
 
-const neptuneGeometry = new THREE.SphereGeometry(0.24, 32, 32);
-const neptuneTexture = new THREE.TextureLoader().load('./assets/neptune.jpg');
-const neptuneMaterial = new THREE.MeshStandardMaterial({ map: neptuneTexture });
-const neptune = new THREE.Mesh(neptuneGeometry, neptuneMaterial);
-neptune.position.set(750 + sunRadius, 0, 0);
-neptune.name = "Neptune";
+//Neptune
 scene.add(neptune);
-
-const neptuneOrbitRadius = 750 + sunRadius;
-const neptuneOrbitPoints = 100;
-const neptuneOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(neptuneOrbitRadius, neptuneOrbitPoints));
-neptuneOrbitGeometry.attributes.position.count -= 1;
-const neptuneOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x5064a1 });
-const neptuneOrbit = new THREE.LineLoop(neptuneOrbitGeometry, neptuneOrbitMaterial);
 scene.add(neptuneOrbit);
-
-const neptuneRingRadius = 0.09; // Przykładowy promień obręczy
-const neptuneRingSegments = 100; // Przykładowa liczba segmentów obręczy dla Marsa
-const neptuneRingGeometry = new THREE.RingGeometry(neptuneRingRadius, neptuneRingRadius + 0.01, neptuneRingSegments);
-const neptuneRingMaterial = new THREE.MeshBasicMaterial({ color: 0x3068E8, side: THREE.DoubleSide });
-const neptuneRing = new THREE.Mesh(neptuneRingGeometry, neptuneRingMaterial);
 neptune.add(neptuneRing);
-
 neptuneRing.rotation.x = Math.PI / 2; // Obrót wokół osi X o 90 stopni
 
 const earthAxis = new THREE.Vector3(0, 1, 0).normalize();
 const earthSpeed = 0.001;
-const sunAxis = new THREE.Vector3(0, -1, 0).normalize();
-const sunSpeed = 0.001;
-
-
+  
 let selectedPlanet = sun;
 let isDragging = false;
 let prevMouseX = 0;
