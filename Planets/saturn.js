@@ -18,11 +18,17 @@ const saturnOrbitMaterial = new THREE.LineBasicMaterial({ color: 0xa09165 });
 const saturnOrbit = new THREE.LineLoop(saturnOrbitGeometry, saturnOrbitMaterial);
 
 
-
 const saturnRingRadius = 0.09; // Przykładowy promień obręczy
 const saturnRingSegments = 100; // Przykładowa liczba segmentów obręczy dla Marsa
 const saturnRingGeometry = new THREE.RingGeometry(saturnRingRadius, saturnRingRadius + 0.01, saturnRingSegments);
 const saturnRingMaterial = new THREE.MeshBasicMaterial({ color: 0xC7A876, side: THREE.DoubleSide });
 const saturnRing = new THREE.Mesh(saturnRingGeometry, saturnRingMaterial);
 
-export { saturn, saturnOrbit, saturnRing }
+//saturnSpeed
+const saturnSpeed = 0.0011;
+
+//saturnRotate
+const saturnAxis = new THREE.Vector3(0, 1, 0).normalize();
+const saturnRotate = 0.0017;
+
+export { saturn, saturnOrbit, saturnRing, saturnSpeed, saturnAxis, saturnRotate }

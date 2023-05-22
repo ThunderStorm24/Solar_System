@@ -18,13 +18,18 @@ mercuryOrbitGeometry.attributes.position.count -= 1;
 const mercuryOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x714e81 });
 const mercuryOrbit = new THREE.LineLoop(mercuryOrbitGeometry, mercuryOrbitMaterial);
 
-
-
+//Ring of Mercury
 const mercuryRingRadius = 0.05; // Przykładowy promień obręczy
 const mercuryRingSegments = 100; // Przykładowa liczba segmentów obręczy
 const mercuryRingGeometry = new THREE.RingGeometry(mercuryRingRadius, mercuryRingRadius + 0.01, mercuryRingSegments);
 const mercuryRingMaterial = new THREE.MeshBasicMaterial({ color: 0x714e81, side: THREE.DoubleSide });
 const mercuryRing = new THREE.Mesh(mercuryRingGeometry, mercuryRingMaterial);
 
+//mercurySpeed with Orbit
+const mercurySpeed = 0.0047;
 
-export {mercury , mercuryOrbit, mercuryRing} 
+//MercuryRotate
+const mercuryAxis = new THREE.Vector3(0, 1, 0).normalize();
+const mercuryRotate = 0.006 ;
+
+export {mercury , mercuryOrbit, mercuryRing, mercurySpeed, mercuryAxis, mercuryRotate} 

@@ -25,4 +25,11 @@ const neptuneRingGeometry = new THREE.RingGeometry(neptuneRingRadius, neptuneRin
 const neptuneRingMaterial = new THREE.MeshBasicMaterial({ color: 0x3068E8, side: THREE.DoubleSide });
 const neptuneRing = new THREE.Mesh(neptuneRingGeometry, neptuneRingMaterial);
 
-export { neptune, neptuneOrbit, neptuneRing }
+//neptuneSpeed with Orbit
+const neptuneSpeed = 0.0003; // 1 miesiac
+
+//neptuneRotate
+const neptuneAxis = new THREE.Vector3(0, 1, 0).normalize();
+const neptuneRotate = 0.00047; // 1 miesiac
+
+export { neptune, neptuneOrbit, neptuneRing, neptuneSpeed, neptuneAxis, neptuneRotate }

@@ -25,5 +25,11 @@ const venusRingGeometry = new THREE.RingGeometry(venusRingRadius, venusRingRadiu
 const venusRingMaterial = new THREE.MeshBasicMaterial({ color: 0xf5c45a, side: THREE.DoubleSide });
 const venusRing = new THREE.Mesh(venusRingGeometry, venusRingMaterial);
 
+//venusSpeed with Orbit
+const venusSpeed = 0.0034;
 
-export {venus, venusOrbit, venusRing}
+//venusRotate
+const venusAxis = new THREE.Vector3(0, 1, 0).normalize();
+const venusRotate = 0.003 ;
+
+export {venus, venusOrbit, venusRing, venusSpeed, venusAxis, venusRotate}

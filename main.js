@@ -1,13 +1,13 @@
 import * as THREE from 'three';
-import { sun } from './Planets/sun.js'
-import { mercury, mercuryOrbit, mercuryRing } from './Planets/mercury'
-import { venus, venusOrbit, venusRing } from './Planets/venus'
-import { earth, earthOrbit, earthRing } from './Planets/earth'
-import { mars, marsOrbit, marsRing } from './Planets/mars'
-import { jupiter, jupiterOrbit, jupiterRing } from './Planets/jupiter'
-import { saturn, saturnOrbit, saturnRing } from './Planets/saturn'
-import { uranus, uranusOrbit, uranusRing } from './Planets/uranus'
-import { neptune, neptuneOrbit, neptuneRing } from './Planets/neptune'
+import { sun, sunAxis, sunRotate } from './Planets/sun.js'
+import { mercury, mercuryOrbit, mercuryRing, mercurySpeed, mercuryAxis, mercuryRotate } from './Planets/mercury'
+import { venus, venusOrbit, venusRing, venusSpeed, venusAxis, venusRotate } from './Planets/venus'
+import { earth, earthOrbit, earthRing, earthSpeed, earthAxis, earthRotate } from './Planets/earth'
+import { mars, marsOrbit, marsRing, marsSpeed, marsAxis, marsRotate } from './Planets/mars'
+import { jupiter, jupiterOrbit, jupiterRing, jupiterSpeed, jupiterAxis, jupiterRotate } from './Planets/jupiter'
+import { saturn, saturnOrbit, saturnRing, saturnSpeed, saturnAxis, saturnRotate } from './Planets/saturn'
+import { uranus, uranusOrbit, uranusRing, uranusSpeed, uranusAxis, uranusRotate } from './Planets/uranus'
+import { neptune, neptuneOrbit, neptuneRing, neptuneSpeed, neptuneAxis, neptuneRotate } from './Planets/neptune'
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -72,25 +72,10 @@ scene.add(neptuneOrbit);
 neptune.add(neptuneRing);
 neptuneRing.rotation.x = Math.PI / 2; // Obrót wokół osi X o 90 stopni
 
-const earthAxis = new THREE.Vector3(0, 1, 0).normalize();
-const earthSpeed = 0.001;
-
 let selectedPlanet = sun;
 let isDragging = false;
 let prevMouseX = 0;
 let prevMouseY = 0;
-
-function getCirclePoints(radius, segments) {
-  const points = [];
-  const angleStep = (Math.PI * 2) / segments;
-  for (let i = 0; i < segments; i++) {
-    const angle = i * angleStep;
-    const x = Math.cos(angle) * radius;
-    const z = Math.sin(angle) * radius;
-    points.push(new THREE.Vector3(x, 0, z));
-  }
-  return points;
-}
 
 function selectPlanet(planet) {
   if (planet.name !== '') {
@@ -143,6 +128,7 @@ function onMouseUp(event) {
   isDragging = false;
 }
 
+
 function onScroll(event) {
   const delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
 
@@ -190,14 +176,26 @@ function onScroll(event) {
 }
 
 const planetsRing = [
-  { planet: mercury, ring: mercuryRing },
-  { planet: venus, ring: venusRing },
-  { planet: earth, ring: earthRing },
-  { planet: mars, ring: marsRing },
-  { planet: jupiter, ring: jupiterRing },
-  { planet: saturn, ring: saturnRing },
-  { planet: uranus, ring: uranusRing },
-  { planet: neptune, ring: neptuneRing }
+  { planet: mercury, ring: mercuryRing, speed: mercurySpeed},
+  { planet: venus, ring: venusRing, speed: venusSpeed},
+  { planet: earth, ring: earthRing, speed: earthSpeed},
+  { planet: mars, ring: marsRing, speed: marsSpeed},
+  { planet: jupiter, ring: jupiterRing, speed: jupiterSpeed},
+  { planet: saturn, ring: saturnRing, speed: saturnSpeed},
+  { planet: uranus, ring: uranusRing, speed: uranusSpeed},
+  { planet: neptune, ring: neptuneRing, speed: neptuneSpeed}
+];
+
+const planetsRotate = [
+  { planet: sun, planetAxis: sunAxis, planetRotate: sunRotate},
+  { planet: mercury, planetAxis: mercuryAxis, planetRotate: mercuryRotate},
+  { planet: venus, planetAxis: venusAxis, planetRotate: venusRotate},
+  { planet: earth, planetAxis: earthAxis, planetRotate: earthRotate},
+  { planet: mars, planetAxis: marsAxis, planetRotate: marsRotate},
+  { planet: jupiter, planetAxis: jupiterAxis, planetRotate: jupiterRotate},
+  { planet: saturn, planetAxis: saturnAxis, planetRotate: saturnRotate},
+  { planet: uranus, planetAxis: uranusAxis, planetRotate: uranusRotate},
+  { planet: neptune, planetAxis: neptuneAxis, planetRotate: neptuneRotate},
 ];
 
 function updateRingScale() {
@@ -208,18 +206,66 @@ function updateRingScale() {
   });
 }
 
-const planets = [sun, mercury, venus, earth, mars, jupiter, saturn, uranus, neptune];
+let number = 1;
+let times = document.getElementById('time');
+times.addEventListener('change',()=>{
+  number = times.value;
+});
+console.log(times);
+function rotatePlanets() {
+  planetsRing.forEach(({ planet, speed }) => {
+    if (movable) {
+      const orbitCenter = new THREE.Vector3(0, 0, 0); // Środek orbity
+      const axis = new THREE.Vector3(0, 1, 0); // Oś Y (wzdłuż pionowej osi Y)
+      const rotationSpeed = speed * number; // Prędkość obrotu (w radianach na klatkę)
+
+      planet.position.applyAxisAngle(axis, rotationSpeed);
+      planet.position.add(orbitCenter);
+
+      planet.rotation.y += rotationSpeed;
+
+      if(follow){
+      // Aktualizacja pozycji kamery względem planety
+      camera.position.copy(selectedPlanet.position); // Ustawienie pozycji kamery na pozycję planety
+      const cameraOffset = new THREE.Vector3(0, 130, -200); // Przesunięcie kamery względem planety (można dostosować)
+      cameraOffset.applyQuaternion(selectedPlanet.quaternion); // Zastosowanie rotacji planety do przesunięcia kamery
+      camera.position.add(cameraOffset);
+      camera.lookAt(selectedPlanet.position); // Skierowanie kamery w stronę planety
+      }
+    }
+  });
+}
+
+// Funkcja renderująca scenę
+function renderScene() {
+  rotatePlanets();
+
+  // Renderowanie sceny (kod renderowania nie jest zawarty w przykładzie, należy go dodać odpowiednio do Twojego kodu)
+  // renderer.render(scene, camera);
+}
 
 function animate() {
   requestAnimationFrame(animate);
+  renderScene();
   updateRingScale();
 
-  planets.forEach((planet) => {
-    planet.rotateOnAxis(earthAxis, earthSpeed);
+  planetsRotate.forEach(({ planet, planetAxis, planetRotate }) => {
+    planet.rotateOnAxis(planetAxis, planetRotate);
   });
 
   renderer.render(scene, camera);
 }
+
+let movable = false;
+let handleMove = document.getElementById('Move');
+handleMove.addEventListener('click', ()=>{
+  movable = !movable;
+});
+let follow = false;
+let handleCameraMove = document.getElementById('CameraMove');
+handleCameraMove.addEventListener('click', ()=>{
+  follow = !follow;
+});
 
 // Dodawanie nasłuchiwania na zdarzenia myszy
 document.addEventListener('mousedown', onMouseDown, false);
@@ -275,5 +321,7 @@ function onPlanetClick(event) {
 camera.position.x = 0;
 camera.position.y = 0;
 camera.position.z = 20;
+camera.far = 4000;
+camera.updateProjectionMatrix();
 
 animate();

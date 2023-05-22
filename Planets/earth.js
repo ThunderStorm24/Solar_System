@@ -26,4 +26,11 @@ const earthRingGeometry = new THREE.RingGeometry(earthRingRadius, earthRingRadiu
 const earthRingMaterial = new THREE.MeshBasicMaterial({ color: 0x4a90e2, side: THREE.DoubleSide });
 const earthRing = new THREE.Mesh(earthRingGeometry, earthRingMaterial);
 
-export {earth, earthOrbit, earthRing }
+//EarthSpeed with Orbit
+const earthSpeed = 0.0029;
+
+//EarthRotate
+const earthAxis = new THREE.Vector3(0, 1, 0).normalize();
+const earthRotate = 0.004 ;
+
+export {earth, earthOrbit, earthRing, earthSpeed, earthAxis, earthRotate }

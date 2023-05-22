@@ -25,4 +25,11 @@ const jupiterRingGeometry = new THREE.RingGeometry(jupiterRingRadius, jupiterRin
 const jupiterRingMaterial = new THREE.MeshBasicMaterial({ color: 0x7a4e40, side: THREE.DoubleSide });
 const jupiterRing = new THREE.Mesh(jupiterRingGeometry, jupiterRingMaterial);
 
-export { jupiter, jupiterOrbit, jupiterRing }
+//jupiterSpeed with Orbit
+const jupiterSpeed = 0.0013;
+
+//jupiterRotate
+const jupiterAxis = new THREE.Vector3(0, 1, 0).normalize();
+const jupiterRotate = 0.0015;
+
+export { jupiter, jupiterOrbit, jupiterRing, jupiterSpeed, jupiterAxis, jupiterRotate }

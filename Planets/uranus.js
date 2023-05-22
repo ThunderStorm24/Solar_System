@@ -23,4 +23,11 @@ const uranusRingGeometry = new THREE.RingGeometry(uranusRingRadius, uranusRingRa
 const uranusRingMaterial = new THREE.MeshBasicMaterial({ color: 0x77B7D8, side: THREE.DoubleSide });
 const uranusRing = new THREE.Mesh(uranusRingGeometry, uranusRingMaterial);
 
-export { uranus, uranusOrbit, uranusRing }
+//uranusSpeed with Orbit
+const uranusSpeed = 0.00047;
+
+//uranusRotate
+const uranusAxis = new THREE.Vector3(0, 1, 0).normalize();
+const uranusRotate = 0.00047 ;
+
+export { uranus, uranusOrbit, uranusRing, uranusSpeed, uranusAxis, uranusRotate }

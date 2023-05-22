@@ -24,4 +24,11 @@ const marsRingGeometry = new THREE.RingGeometry(marsRingRadius, marsRingRadius +
 const marsRingMaterial = new THREE.MeshBasicMaterial({ color: 0x562b0e, side: THREE.DoubleSide });
 const marsRing = new THREE.Mesh(marsRingGeometry, marsRingMaterial);
 
-export { mars, marsOrbit, marsRing }
+//marsSpeed with Orbit
+const marsSpeed = 0.0024;
+
+//marsRotate
+const marsAxis = new THREE.Vector3(0, 1, 0).normalize();
+const marsRotate = 0.007;
+
+export { mars, marsOrbit, marsRing, marsSpeed, marsAxis, marsRotate }

@@ -19,4 +19,8 @@ sun.add(sunLight);
 sun.name = "Sun";
 sun.position.set(0, 0, 0);
 
-export { sun }
+//sunRotate
+const sunAxis = new THREE.Vector3(0, 1, 0).normalize();
+const sunRotate = 0.01;
+
+export { sun, sunAxis, sunRotate }
