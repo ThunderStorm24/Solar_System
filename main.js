@@ -21,6 +21,7 @@ scene.add(light);
 const environmentTexture = new THREE.TextureLoader().load('./assets/star_milky.jpg');
 scene.background = environmentTexture;
 
+
 scene.add(sun);
 
 //Mercury
