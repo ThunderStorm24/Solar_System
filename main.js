@@ -79,7 +79,7 @@ let isDragging = false;
 let prevMouseX = 0;
 let prevMouseY = 0;
 
-const menuIds = ['modular-window', 'sun', 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'time', 'Move', 'stop-animation', 'ars', 'CameraMove', 'cont', 'desc-holder', 'content', 'holdeofDescNames', 'planetName', 'descriptionName','descHolder'];
+const menuIds = ['modular-window', 'sun', 'mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'time', 'Move', 'stop-animation', 'ars', 'CameraMove', 'cont', 'desc-holder', 'content', 'holdeofDescNames', 'planetName', 'descriptionName','descHolder','zakres'];
 
 
 
