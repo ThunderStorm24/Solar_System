@@ -1,37 +1,85 @@
 <!DOCTYPE html>
 <html>
-    <head lang="en">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <meta charset="utf-8">
-        <title>My first three.js app</title>
-        <link rel="stylesheet" href="main.css" type="text/css">
-    </head>
-    <body>
-        <div id="modular-window">
-            <div id="sun" class="clicked">Sun</div>
-            <div id="mercury">Mercury</div>
-            <div id="venus">Venus</div>
-            <div id="earth">Earth</div>
-            <div id="mars">Mars</div>
-            <div id="jupiter">Jupiter</div>
-            <div id="saturn">Saturn</div>
-            <div id="uranus">Uranus</div>
-            <div id="neptune">Neptune</div>
-            <button id="Move">Stop</button>
-            <button id="CameraMove">Follow</button>
-            <input id="time" type="range" min="1" max="12" />
+  <head lang="en">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <meta charset="utf-8" />
+    <title>My first three.js app</title>
+    <link rel="stylesheet" href="main.css" type="text/css" />
+  </head>
+  <body>
+    <div id="modular-window">
+      <div id="sun" class="clicked planet">Sun</div>
+      <div id="mercury" class="planet">Mercury</div>
+      <div id="venus" class="planet">Venus</div>
+      <div id="earth" class="planet">Earth</div>
+      <div id="mars" class="planet">Mars</div>
+      <div id="jupiter" class="planet">Jupiter</div>
+      <div id="saturn" class="planet">Saturn</div>
+      <div id="uranus" class="planet">Uranus</div>
+      <div id="neptune" class="planet">Neptune</div>
+      <div class="mt-2 d-flex flex-column align-items-center" id="ars">
+        <div class="d-flex flex-column">
+          <div class="d-flex">
+            <div class="me-5">
+              <svg
+                class="start-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                height="40"
+                viewBox="0 -960 960 960"
+                width="40"
+                id="Move"
+              >
+                <path
+                  d="M326.667-326.667h66.666v-306.666h-66.666v306.666Zm160-6L708-480 486.667-627.333v294.666ZM480-80q-82.333 0-155.333-31.5t-127.334-85.833Q143-251.667 111.5-324.667T80-480q0-83 31.5-156t85.833-127q54.334-54 127.334-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82.333-31.5 155.333T763-197.333Q709-143 636-111.5T480-80Zm0-66.666q139.333 0 236.334-97.334 97-97.333 97-236 0-139.333-97-236.334-97.001-97-236.334-97-138.667 0-236 97Q146.666-619.333 146.666-480q0 138.667 97.334 236 97.333 97.334 236 97.334ZM480-480Z"
+                />
+              </svg>
+            </div>
+            <div>
+              <svg
+                class="stop-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                height="40"
+                viewBox="0 -960 960 960"
+                width="40"
+                id="stop-animation"
+              >
+                <path
+                  d="M366.667-320h66.666v-320h-66.666v320Zm160 0h66.666v-320h-66.666v320ZM480-80q-82.333 0-155.333-31.5t-127.334-85.833Q143-251.667 111.5-324.667T80-480q0-83 31.5-156t85.833-127q54.334-54 127.334-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 82.333-31.5 155.333T763-197.333Q709-143 636-111.5T480-80Zm0-66.666q139.333 0 236.334-97.334 97-97.333 97-236 0-139.333-97-236.334-97.001-97-236.334-97-138.667 0-236 97Q146.666-619.333 146.666-480q0 138.667 97.334 236 97.333 97.334 236 97.334ZM480-480Z"
+                />
+              </svg>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center mt-2">
+            <button id="CameraMove" class="follow-button">Follow</button>
+          </div>
         </div>
-        
-        <script type="module" src="/main.js"></script>
+        <div class="mt-3">
+          <input
+            class="planet-speed-slider"
+            id="time"
+            type="range"
+            min="1"
+            max="12"
+          />
+        </div>
+      </div>
+    </div>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $("#modular-window div").click(function() {
-                    $("#modular-window div").removeClass("clicked");
-                    $(this).addClass("clicked");
-                });
-            });
-        </script>
-    </body>
+    <div class="cont col-4" id="cont"></div>
+
+    <script type="module" src="/main.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#modular-window div").click(function () {
+          $("#modular-window div").removeClass("clicked");
+          $(this).addClass("clicked");
+        });
+      });
+    </script>
+  </body>
 </html>
