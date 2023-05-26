@@ -11,7 +11,7 @@ mars.position.set(228 + sunRadius, 0, 0);
 mars.name = "Mars";
 
 const marsOrbitRadius = 228 + sunRadius;
-const marsOrbitPoints = 100;
+const marsOrbitPoints = 1000;
 const marsOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(marsOrbitRadius, marsOrbitPoints));
 marsOrbitGeometry.attributes.position.count -= 1;
 const marsOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x562b0e });
@@ -25,7 +25,7 @@ const marsRingMaterial = new THREE.MeshBasicMaterial({ color: 0x562b0e, side: TH
 const marsRing = new THREE.Mesh(marsRingGeometry, marsRingMaterial);
 
 //marsSpeed with Orbit
-const marsSpeed = 0.0024;
+const marsSpeed = 0.0027;
 
 //marsRotate
 const marsAxis = new THREE.Vector3(0, 1, 0).normalize();

@@ -12,7 +12,7 @@ jupiter.name = "Jupiter";
 
 //Jupiter orbit
 const jupiterOrbitRadius = 478 + sunRadius;
-const jupiterOrbitPoints = 100;
+const jupiterOrbitPoints = 1000;
 const jupiterOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(jupiterOrbitRadius, jupiterOrbitPoints));
 jupiterOrbitGeometry.attributes.position.count -= 1;
 const jupiterOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x7a4e40 });
@@ -26,7 +26,7 @@ const jupiterRingMaterial = new THREE.MeshBasicMaterial({ color: 0x7a4e40, side:
 const jupiterRing = new THREE.Mesh(jupiterRingGeometry, jupiterRingMaterial);
 
 //jupiterSpeed with Orbit
-const jupiterSpeed = 0.0013;
+const jupiterSpeed = 0.0024;
 
 //jupiterRotate
 const jupiterAxis = new THREE.Vector3(0, 1, 0).normalize();

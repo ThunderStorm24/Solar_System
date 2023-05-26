@@ -12,7 +12,7 @@ venus.position.set(108 + sunRadius, 0, 0);
 
 //Orbit of Venus
 const venusOrbitRadius = 108 + sunRadius;
-const venusOrbitPoints = 100;
+const venusOrbitPoints = 1000;
 const venusOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(venusOrbitRadius, venusOrbitPoints));
 venusOrbitGeometry.attributes.position.count -= 1;
 const venusOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x422d09 });

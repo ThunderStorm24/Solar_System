@@ -11,7 +11,7 @@ uranus.name = "Uranus";
 
 
 const uranusOrbitRadius = 680 + sunRadius;
-const uranusOrbitPoints = 100;
+const uranusOrbitPoints = 1000;
 const uranusOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(uranusOrbitRadius, uranusOrbitPoints));
 uranusOrbitGeometry.attributes.position.count -= 1;
 const uranusOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x3a737a });
@@ -24,7 +24,7 @@ const uranusRingMaterial = new THREE.MeshBasicMaterial({ color: 0x77B7D8, side: 
 const uranusRing = new THREE.Mesh(uranusRingGeometry, uranusRingMaterial);
 
 //uranusSpeed with Orbit
-const uranusSpeed = 0.00047;
+const uranusSpeed = 0.0016;
 
 //uranusRotate
 const uranusAxis = new THREE.Vector3(0, 1, 0).normalize();

@@ -13,7 +13,7 @@ earth.name = "Earth";
 
 //EarthOrbit
 const earthOrbitRadius = 149 + sunRadius;
-const earthOrbitPoints = 100;
+const earthOrbitPoints = 1000;
 const earthOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(earthOrbitRadius, earthOrbitPoints));
 earthOrbitGeometry.attributes.position.count -= 1;
 const earthOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x00394c });
@@ -27,10 +27,19 @@ const earthRingMaterial = new THREE.MeshBasicMaterial({ color: 0x4a90e2, side: T
 const earthRing = new THREE.Mesh(earthRingGeometry, earthRingMaterial);
 
 //EarthSpeed with Orbit
-const earthSpeed = 0.0029;
+const earthSpeed = 0.0030;
 
 //EarthRotate
 const earthAxis = new THREE.Vector3(0, 1, 0).normalize();
 const earthRotate = 0.004 ;
+
+// Moon
+const moonGeometry = new THREE.SphereGeometry(0.02, 32, 32);
+const moonTexture = new THREE.TextureLoader().load('./assets/moon.jpg');
+const moonMaterial = new THREE.MeshStandardMaterial({ map: moonTexture });
+const moon = new THREE.Mesh(moonGeometry, moonMaterial);
+moon.position.set(0.2, 0.1, 0); // Ustawienie pozycji Księżyca względem Ziemi
+
+earth.add(moon); // Dodanie Księżyca do obiektu Ziemi
 
 export {earth, earthOrbit, earthRing, earthSpeed, earthAxis, earthRotate }

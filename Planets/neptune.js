@@ -12,7 +12,7 @@ neptune.name = "Neptune";
 
 //Neptun Orbit
 const neptuneOrbitRadius = 750 + sunRadius;
-const neptuneOrbitPoints = 100;
+const neptuneOrbitPoints = 1000;
 const neptuneOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(neptuneOrbitRadius, neptuneOrbitPoints));
 neptuneOrbitGeometry.attributes.position.count -= 1;
 const neptuneOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x5064a1 });
@@ -26,10 +26,10 @@ const neptuneRingMaterial = new THREE.MeshBasicMaterial({ color: 0x3068E8, side:
 const neptuneRing = new THREE.Mesh(neptuneRingGeometry, neptuneRingMaterial);
 
 //neptuneSpeed with Orbit
-const neptuneSpeed = 0.0003; // 1 miesiac
+const neptuneSpeed = 0.0013; // 1 miesiac
 
 //neptuneRotate
 const neptuneAxis = new THREE.Vector3(0, 1, 0).normalize();
 const neptuneRotate = 0.00047; // 1 miesiac
 
-export { neptune, neptuneOrbit, neptuneRing, neptuneSpeed, neptuneAxis, neptuneRotate }
+export { neptune, neptuneOrbit, neptuneRing, neptuneSpeed, neptuneAxis, neptuneRotate } 

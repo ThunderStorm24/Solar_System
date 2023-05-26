@@ -12,7 +12,7 @@ mercury.position.set(58 + sunRadius, 0, 0);
 
 //Orbit of Mercury
 const mercuryOrbitRadius = 58 + sunRadius; // Przeniesiona definicja zmiennej
-const mercuryOrbitPoints = 100;
+const mercuryOrbitPoints = 1000;
 const mercuryOrbitGeometry = new THREE.BufferGeometry().setFromPoints(getCirclePoints(mercuryOrbitRadius, mercuryOrbitPoints));
 mercuryOrbitGeometry.attributes.position.count -= 1;
 const mercuryOrbitMaterial = new THREE.LineBasicMaterial({ color: 0x714e81 });
@@ -32,4 +32,4 @@ const mercurySpeed = 0.0047;
 const mercuryAxis = new THREE.Vector3(0, 1, 0).normalize();
 const mercuryRotate = 0.006 ;
 
-export {mercury , mercuryOrbit, mercuryRing, mercurySpeed, mercuryAxis, mercuryRotate} 
+export {mercury , mercuryOrbit, mercuryRing, mercurySpeed, mercuryAxis, mercuryRotate}
