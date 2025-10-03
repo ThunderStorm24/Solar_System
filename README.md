@@ -1,3 +1,7 @@
+# DEMO  
+
+👉 [**Try the demo!**](https://thunderstorm24.github.io/Solar_System)
+
 # Solar_System
 
 Solar System created in three.js
