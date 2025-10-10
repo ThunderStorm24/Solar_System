@@ -12,6 +12,33 @@ One of the most intriguing aspects of our project is the implementation of reali
 
 Furthermore, we have incorporated educational elements into our visualization. For each planet, there is accompanying information and interesting facts about its characteristics, such as size, mass, atmospheric composition, number of moons, and fascinating scientific details related to the specific object.
 
+---
+
+## Controls
+
+The Solar System project offers intuitive camera and interaction controls, allowing users to explore the scene freely and interact with planets in real time.
+
+### 🖱️ Mouse Controls:
+- **Mouse Up** – Zoom out from the selected planet.  
+- **Mouse Down** – Zoom in to get a closer look at the planet.  
+- **Hold Left Mouse Button (on space)** – Rotate the camera around the Solar System by moving the mouse. *(Note: rotation works only when clicking on empty space, not directly on planets.)*  
+- **Click on a Planet** – Opens a modal window displaying detailed information about the selected planet.  
+  - If the modal does not close automatically, click the same planet again to close it.  
+- **Planet Focus** – Clicking a planet also shifts the camera’s focus to it, making it the central point of view when the simulation is paused.
+
+### 🎛️ Control Panel:
+The control panel, visible on the left side (as shown in the attached image), provides several key features:
+
+- **Planet Buttons** – Select a planet to view it up close and display its informational modal.  
+- **Start Button** ▶️ – Starts the simulation of all planetary orbits.  
+- **Stop Button** ⏸️ – Pauses the movement of the planets.  
+- **Follow Button** 🎯 – Enables the camera to automatically follow the selected planet, creating a dynamic tracking effect.  
+- **Months (Speed) Slider** – Adjusts the orbital speed of all planets, simulating their movement relative to a time span from **1 to 12 months**.  
+
+These controls provide a smooth and interactive way to navigate, observe, and learn about our Solar System through a realistic and visually engaging Three.js environment.
+
+---
+
 ## To run the application
 
 In the **SolarSystem_three.js** directory, you can run:
