@@ -4,7 +4,7 @@
 
 # Solar_System
 
-Solar System created in three.js
+Solar System created in three.js ![Three.js](https://img.shields.io/badge/Three.js-000000?style=flat-square&logo=three.js&logoColor=white) 
 
 The project enables interactive navigation through the solar system using a camera. Users can freely move around and track the motion of planets orbiting the Sun. With special options, they can also change the speed of planetary motion, simulating orbits around the Sun ranging from one to twelve months. They can zoom in and out on planets to see their details up close and learn about their appearances.
 
